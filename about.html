@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>About | Mari Kawan Creative</title>
+    <meta
+      name="description"
+      content="Mari Kawan Creative is a creative studio that builds websites for businesses and institutions."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              blue: "#1684AD",
+              darkBlue: "#0f6182",
+              lightBlue: "#e0f2fe",
+              light: "#f8fafc",
+            },
+            fontFamily: {
+              sans: [
+                "Inter",
+                "-apple-system",
+                "BlinkMacSystemFont",
+                '"Segoe UI"',
+                "Roboto",
+                "sans-serif",
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body class="bg-white font-sans antialiased">
+    <!-- Site header -->
+    <header class="site-header">
+      <div class="container site-header__bar">
+        <a
+          href="index.html"
+          class="brand"
+          aria-label="Mari Kawan Creative, home"
+        >
+          <!-- LOGO: replace the .brand__mark span with <img src="assets/logo.svg" alt="" class="brand__logo"> -->
+          <span class="brand__mark">MKC</span>
+          <span class="brand__name">Mari Kawan Creative</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="index.html">Home</a
+          ><a href="about.html" aria-current="page">About</a
+          ><a href="services.html">Services</a
+          ><a href="case-studies.html">Case Studies</a
+          ><a href="contact.html">Contact</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="btn btn-primary btn-sm" href="contact.html">Get a Quote</a>
+          <button
+            id="menu-btn"
+            class="menu-btn"
+            aria-label="Menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            >
+              <path d="M3 7h14M3 13h14" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="mobile-menu" hidden>
+        <a href="index.html">Home</a><a href="about.html">About</a
+        ><a href="services.html">Services</a
+        ><a href="case-studies.html">Case Studies</a
+        ><a href="contact.html">Contact</a>
+      </div>
+    </header>
+    <main>
+      <!-- Page hero -->
+      <section class="page-hero">
+        <div class="container">
+          <p class="t-eyebrow rv">About us</p>
+          <h1 class="t-h1 rv">
+            We build websites that<br class="hide-sm" />
+            represent you well.
+          </h1>
+          <p class="t-lead rv">
+            Mari Kawan Creative is a creative studio that designs and builds
+            clear, fast websites for businesses and institutions.
+          </p>
+        </div>
+      </section>
+      <!-- Story -->
+      <section class="section">
+        <div class="container">
+          <div class="grid-2 grid-2--wide">
+            <h2 class="t-h2 rv">Simple, honest and carefully made.</h2>
+            <div class="stack-text rv">
+              <p class="t-body">
+                We focus on four kinds of websites: company profiles, catalogs,
+                news sites and landing pages. By staying focused, we can make
+                each one better.
+              </p>
+              <p class="t-body">
+                Every project starts with your goals and your audience, and ends
+                with a site that is fast, clear and easy to use on any device.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Values -->
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head rv">
+            <h2 class="t-h2">What we care about.</h2>
+          </div>
+          <div class="grid-3 mt-12">
+            <div class="card rv">
+              <h3 class="t-h3">Clarity</h3>
+              <p class="t-body">
+                Clear structure and plain language, so visitors find what they
+                need quickly.
+              </p>
+            </div>
+            <div class="card rv">
+              <h3 class="t-h3">Craft</h3>
+              <p class="t-body">
+                Careful spacing, type and detail, because small things shape
+                trust.
+              </p>
+            </div>
+            <div class="card rv">
+              <h3 class="t-h3">Care</h3>
+              <p class="t-body">
+                Fast communication, honest timelines and support after launch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Process -->
+      <section class="section section-alt">
+        <div class="container">
+          <div class="section-head rv"><h2 class="t-h2">How we work.</h2></div>
+          <div class="grid-4 mt-12">
+            <div class="card rv">
+              <p class="step-num">01</p>
+              <h3 class="t-h3">Discover</h3>
+              <p class="t-body">We learn your goals, audience and content.</p>
+            </div>
+            <div class="card rv">
+              <p class="step-num">02</p>
+              <h3 class="t-h3">Design</h3>
+              <p class="t-body">
+                A clear, mobile-first layout in your brand colors.
+              </p>
+            </div>
+            <div class="card rv">
+              <p class="step-num">03</p>
+              <h3 class="t-h3">Build</h3>
+              <p class="t-body">
+                Fast, accessible pages that work on every device.
+              </p>
+            </div>
+            <div class="card rv">
+              <p class="step-num">04</p>
+              <h3 class="t-h3">Launch</h3>
+              <p class="t-body">
+                We publish, test and hand over, with support after.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Call to action -->
+      <section class="cta on-dark">
+        <div class="container">
+          <h2 class="t-h2 rv">Let's build yours.</h2>
+          <p class="t-lead rv">
+            Tell us about your project and get a clear plan and quote.
+          </p>
+          <p class="rv">
+            <a href="contact.html" class="btn btn-light">Get a Quote</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Site footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2 class="footer-title">Contact Info</h2>
+            <address class="footer-text">
+              123 Creative Street, Jakarta<br />Indonesia - 12345
+            </address>
+            <p class="footer-text">hello[at]marikawan.com</p>
+            <p class="footer-tel">Tel: +62 (800) 555 5555</p>
+            <p class="footer-hours">Monday to Friday | 9:00 AM - 6:00 PM</p>
+          </div>
+          <div>
+            <h2 class="footer-title">Tech Stack</h2>
+            <ul class="footer-list">
+              <li>WordPress &amp; PHP</li>
+              <li>React &amp; Next.js</li>
+              <li>HTML &amp; Tailwind CSS</li>
+              <li>Firebase &amp; PWA</li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="footer-title">Services</h2>
+            <ul class="footer-list">
+              <li><a href="services.html">Company Profile</a></li>
+              <li><a href="services.html">Catalog Website</a></li>
+              <li><a href="services.html">News and Blog</a></li>
+              <li><a href="services.html">Landing Page</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="footer-title">Site Links</h2>
+            <ul class="footer-list">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="case-studies.html">Case Studies</a></li>
+              <!-- TODO: link to a News &amp; Insights page when it exists -->
+              <li><a href="#">News &amp; Insights</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-mid">
+          <a href="index.html" class="brand brand--footer">
+            <span class="brand__mark">MKC</span>
+            <span class="brand__name">Mari Kawan Creative.</span>
+          </a>
+          <p class="footer-tagline">Your Trusted Partner In Digital World</p>
+          <a href="contact.html" class="btn btn-outline-light"
+            >Get Started <span aria-hidden="true">&rarr;</span></a
+          >
+        </div>
+        <div class="footer-bottom">
+          <p>
+            &copy; 2026 &bull; Mari Kawan Creative is a Web Agency. All Rights
+            Reserved.
+          </p>
+          <div class="footer-social">
+            <a
+              href="https://www.instagram.com/marikawanid"
+              class="footer-social__link"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram @marikawanid"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle
+                  cx="17.5"
+                  cy="6.5"
+                  r="1"
+                  fill="currentColor"
+                  stroke="none"
+                /></svg></a
+            ><a
+              href="https://www.youtube.com/@marikawanid"
+              class="footer-social__link"
+              target="_blank"
+              rel="noopener"
+              aria-label="YouTube @marikawanid"
+              ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"
+                /></svg></a
+            ><a
+              href="https://www.tiktok.com/@marikawanid"
+              class="footer-social__link"
+              target="_blank"
+              rel="noopener"
+              aria-label="TikTok @marikawanid"
+              ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"
+                /></svg
+            ></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="assets/main.js"></script>
+  </body>
+</html>
