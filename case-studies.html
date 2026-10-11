@@ -19,6 +19,13 @@
     />
     <script>
       document.documentElement.classList.add("js");
+      (function () {
+        try {
+          var t = localStorage.getItem("mkc-theme");
+          if (!t) t = "light";
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -47,7 +54,7 @@
     </script>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
-  <body class="bg-white font-sans antialiased">
+  <body class="font-sans antialiased">
     <!-- Site header -->
     <header class="site-header">
       <div class="container site-header__bar">
@@ -67,7 +74,68 @@
           ><a href="contact.html">Contact</a>
         </nav>
         <div class="site-header__actions">
-          <a class="btn btn-primary btn-sm" href="contact.html">Get a Quote</a>
+          <div class="lang-menu" data-lang-menu>
+            <button
+              type="button"
+              class="lang-btn"
+              data-lang-toggle
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="lang-list"
+              aria-label="Language"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></svg>
+              <span data-lang-current>EN</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="lang-list" class="lang-list" role="group" aria-label="Language" hidden>
+              <button type="button" data-lang="en" aria-pressed="true">English</button>
+              <button type="button" data-lang="id" aria-pressed="false">Bahasa Indonesia</button>
+              <button type="button" data-lang="es" aria-pressed="false">Español</button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="theme-btn"
+            data-theme-toggle
+            aria-label="Toggle dark mode"
+          >
+            <span class="i-moon"
+              ><svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"
+                /></svg></span
+            ><span class="i-sun"
+              ><svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                /></svg
+            ></span>
+          </button>
+          <a class="btn btn-primary btn-sm site-header__cta" href="contact.html"
+            >Get a Quote</a
+          >
           <button
             id="menu-btn"
             class="menu-btn"
@@ -93,34 +161,226 @@
         ><a href="services.html">Services</a
         ><a href="case-studies.html">Case Studies</a
         ><a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn-primary mobile-menu__cta"
+          >Get a Quote</a
+        >
       </div>
     </header>
     <main>
-      <!-- Page hero -->
-      <section class="page-hero">
-        <div class="container">
-          <p class="t-eyebrow rv">Case studies</p>
-          <h1 class="t-h1 rv">Work we are proud of.</h1>
-          <p class="t-lead rv">
-            Real client projects and demos across all four website types.
-          </p>
-        </div>
-      </section>
-      <!-- Case study grid -->
-      <section class="section">
-        <div class="container">
-          <div class="filters" role="group" aria-label="Filter case studies">
-            <button class="chip is-active" data-f="All">All</button
-            ><button class="chip" data-f="Company Profile">
-              Company Profile</button
-            ><button class="chip" data-f="Catalog">Catalog</button
-            ><button class="chip" data-f="News / Blog">News / Blog</button
-            ><button class="chip" data-f="Landing Page">Landing Page</button>
+      <!-- Case study slider. Each <article class="cs-slide"> is one case.
+     Swap the mockup for <img class="cs-fill"> or <video class="cs-fill" autoplay muted loop playsinline> when you have real media. -->
+      <section
+        class="cs on-dark"
+        data-cs
+        aria-roledescription="carousel"
+        aria-label="Case studies"
+      >
+        <div class="container cs-head">
+          <p class="t-eyebrow">Case studies</p>
+          <h1 class="t-h1">Work we are proud of.</h1>
+          <div class="cs-filter" role="group" aria-label="Filter by category">
+            <button type="button" class="cs-chip" data-cs-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="cs-chip" data-cs-filter="company-profile" aria-pressed="false">Company Profile</button>
+            <button type="button" class="cs-chip" data-cs-filter="catalog" aria-pressed="false">Catalog</button>
+            <button type="button" class="cs-chip" data-cs-filter="news-blog" aria-pressed="false">News / Blog</button>
+            <button type="button" class="cs-chip" data-cs-filter="landing-page" aria-pressed="false">Landing Page</button>
           </div>
-          <div class="grid-3" data-filter-grid>
-            <div class="rv filter-item" data-t="Catalog">
-              <a href="case-natura-furniture.html" class="work-card"
-                ><div class="work-media">
+        </div>
+        <div class="cs-track" data-cs-track tabindex="0">
+          <article
+            class="cs-slide is-active"
+            id="natura-furniture"
+            data-name="Natura Furniture"
+            data-tag="Catalog"
+            data-desc="A furniture catalog built for easy browsing."
+            data-type="Catalog"
+            data-cat="catalog"
+            aria-roledescription="slide"
+          >
+            <div class="cs-media" style="--a: #a16207">
+              <div class="mk mkx" style="--a: #a16207">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div class="grid3" style="grid-template-rows: 1fr 1fr">
+                    <div>
+                      <div class="bx" style="height: 62%"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 45%"></span>
+                    </div>
+                    <div>
+                      <div class="ac" style="height: 62%"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 45%"></span>
+                    </div>
+                    <div>
+                      <div class="bx" style="height: 62%"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 45%"></span>
+                    </div>
+                    <div>
+                      <div class="ac" style="height: 62%"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 45%"></span>
+                    </div>
+                    <div>
+                      <div class="bx" style="height: 62%"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 45%"></span>
+                    </div>
+                    <div>
+                      <div class="ac" style="height: 62%"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 45%"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phone">
+                <div class="phn mkx" style="--a: #a16207">
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1"></div>
+                    <span class="l" style="width: 80%"></span
+                    ><span class="l" style="width: 60%"></span>
+                    <div class="bx" style="flex: 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-gallery" hidden>
+              <div
+                class="cs-media gal-item"
+                data-caption="Desktop view"
+                style="--a: #a16207"
+              >
+                <div class="mk mkx" style="--a: #a16207">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="grid3" style="grid-template-rows: 1fr 1fr">
+                      <div>
+                        <div class="bx" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="ac" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="bx" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="ac" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="bx" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="ac" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Mobile view"
+                style="--a: #a16207"
+              >
+                <div class="gal-phones">
+                  <div class="phn mkx" style="--a: #a16207">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #a16207">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Detail view"
+                style="--a: #a16207"
+              >
+                <div class="mk mkx" style="--a: #a16207">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="grid3" style="grid-template-rows: 1fr 1fr">
+                      <div>
+                        <div class="bx" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="ac" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="bx" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="ac" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="bx" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                      <div>
+                        <div class="ac" style="height: 62%"></div>
+                        <span class="l" style="width: 80%"></span
+                        ><span class="l" style="width: 45%"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-phone">
+                  <div class="phn mkx" style="--a: #a16207">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Close-up"
+                style="--a: #a16207"
+              >
+                <div class="gal-zoom">
                   <div class="mk mkx" style="--a: #a16207">
                     <div class="mk-bar"><i></i><i></i><i></i></div>
                     <div class="mk-body">
@@ -159,17 +419,173 @@
                     </div>
                   </div>
                 </div>
-                <p class="work-tag">Catalog &middot; Demo</p>
-                <h3 class="t-h3">Natura Furniture</h3>
-                <p class="t-body">
-                  A furniture catalog built for easy browsing.
-                </p>
-                <span class="link">View case study &rsaquo;</span></a
-              >
+              </div>
             </div>
-            <div class="rv filter-item" data-t="News / Blog">
-              <a href="case-tropmed-blog.html" class="work-card"
-                ><div class="work-media">
+          </article>
+          <article
+            class="cs-slide"
+            id="tropmed-blog"
+            data-name="Tropmed Blog"
+            data-tag="News / Blog"
+            data-desc="A clean news and article website."
+            data-type="News / Blog"
+            data-cat="news-blog"
+            aria-roledescription="slide"
+          >
+            <div class="cs-media" style="--a: #0f6182">
+              <div class="mk mkx" style="--a: #0f6182">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div class="ac" style="flex: 1.2"></div>
+                  <div class="row" style="flex: 0.5; align-items: center">
+                    <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                    <div>
+                      <span class="l" style="width: 85%"></span
+                      ><span class="l" style="width: 55%"></span>
+                    </div>
+                  </div>
+                  <div class="row" style="flex: 0.5; align-items: center">
+                    <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                    <div>
+                      <span class="l" style="width: 85%"></span
+                      ><span class="l" style="width: 55%"></span>
+                    </div>
+                  </div>
+                  <div class="row" style="flex: 0.5; align-items: center">
+                    <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                    <div>
+                      <span class="l" style="width: 85%"></span
+                      ><span class="l" style="width: 55%"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phone">
+                <div class="phn mkx" style="--a: #0f6182">
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1"></div>
+                    <span class="l" style="width: 80%"></span
+                    ><span class="l" style="width: 60%"></span>
+                    <div class="bx" style="flex: 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-gallery" hidden>
+              <div
+                class="cs-media gal-item"
+                data-caption="Desktop view"
+                style="--a: #0f6182"
+              >
+                <div class="mk mkx" style="--a: #0f6182">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1.2"></div>
+                    <div class="row" style="flex: 0.5; align-items: center">
+                      <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                      <div>
+                        <span class="l" style="width: 85%"></span
+                        ><span class="l" style="width: 55%"></span>
+                      </div>
+                    </div>
+                    <div class="row" style="flex: 0.5; align-items: center">
+                      <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                      <div>
+                        <span class="l" style="width: 85%"></span
+                        ><span class="l" style="width: 55%"></span>
+                      </div>
+                    </div>
+                    <div class="row" style="flex: 0.5; align-items: center">
+                      <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                      <div>
+                        <span class="l" style="width: 85%"></span
+                        ><span class="l" style="width: 55%"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Mobile view"
+                style="--a: #0f6182"
+              >
+                <div class="gal-phones">
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Detail view"
+                style="--a: #0f6182"
+              >
+                <div class="mk mkx" style="--a: #0f6182">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1.2"></div>
+                    <div class="row" style="flex: 0.5; align-items: center">
+                      <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                      <div>
+                        <span class="l" style="width: 85%"></span
+                        ><span class="l" style="width: 55%"></span>
+                      </div>
+                    </div>
+                    <div class="row" style="flex: 0.5; align-items: center">
+                      <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                      <div>
+                        <span class="l" style="width: 85%"></span
+                        ><span class="l" style="width: 55%"></span>
+                      </div>
+                    </div>
+                    <div class="row" style="flex: 0.5; align-items: center">
+                      <div class="bx" style="flex: 0 0 18%; height: 100%"></div>
+                      <div>
+                        <span class="l" style="width: 85%"></span
+                        ><span class="l" style="width: 55%"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-phone">
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Close-up"
+                style="--a: #0f6182"
+              >
+                <div class="gal-zoom">
                   <div class="mk mkx" style="--a: #0f6182">
                     <div class="mk-bar"><i></i><i></i><i></i></div>
                     <div class="mk-body">
@@ -207,15 +623,167 @@
                     </div>
                   </div>
                 </div>
-                <p class="work-tag">News / Blog &middot; Demo</p>
-                <h3 class="t-h3">Tropmed Blog</h3>
-                <p class="t-body">A clean news and article website.</p>
-                <span class="link">View case study &rsaquo;</span></a
-              >
+              </div>
             </div>
-            <div class="rv filter-item" data-t="Landing Page">
-              <a href="case-clipform.html" class="work-card"
-                ><div class="work-media">
+          </article>
+          <article
+            class="cs-slide"
+            id="clipform"
+            data-name="Clipform"
+            data-tag="Landing Page"
+            data-desc="A landing page for a social media course."
+            data-type="Landing Page"
+            data-cat="landing-page"
+            aria-roledescription="slide"
+          >
+            <div class="cs-media" style="--a: #7c3aed">
+              <div class="mk mkx" style="--a: #7c3aed">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div
+                    style="
+                      text-align: center;
+                      display: flex;
+                      flex-direction: column;
+                      align-items: center;
+                      flex: 1;
+                      justify-content: center;
+                    "
+                  >
+                    <span class="l h" style="width: 60%"></span
+                    ><span class="l h" style="width: 40%"></span
+                    ><span class="l" style="width: 50%"></span>
+                    <div class="bt" style="width: 26%; margin: 8px 0"></div>
+                  </div>
+                  <div class="row" style="flex: 0.6">
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phone">
+                <div class="phn mkx" style="--a: #7c3aed">
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1"></div>
+                    <span class="l" style="width: 80%"></span
+                    ><span class="l" style="width: 60%"></span>
+                    <div class="bx" style="flex: 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-gallery" hidden>
+              <div
+                class="cs-media gal-item"
+                data-caption="Desktop view"
+                style="--a: #7c3aed"
+              >
+                <div class="mk mkx" style="--a: #7c3aed">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div
+                      style="
+                        text-align: center;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        flex: 1;
+                        justify-content: center;
+                      "
+                    >
+                      <span class="l h" style="width: 60%"></span
+                      ><span class="l h" style="width: 40%"></span
+                      ><span class="l" style="width: 50%"></span>
+                      <div class="bt" style="width: 26%; margin: 8px 0"></div>
+                    </div>
+                    <div class="row" style="flex: 0.6">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Mobile view"
+                style="--a: #7c3aed"
+              >
+                <div class="gal-phones">
+                  <div class="phn mkx" style="--a: #7c3aed">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #7c3aed">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Detail view"
+                style="--a: #7c3aed"
+              >
+                <div class="mk mkx" style="--a: #7c3aed">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div
+                      style="
+                        text-align: center;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        flex: 1;
+                        justify-content: center;
+                      "
+                    >
+                      <span class="l h" style="width: 60%"></span
+                      ><span class="l h" style="width: 40%"></span
+                      ><span class="l" style="width: 50%"></span>
+                      <div class="bt" style="width: 26%; margin: 8px 0"></div>
+                    </div>
+                    <div class="row" style="flex: 0.6">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-phone">
+                  <div class="phn mkx" style="--a: #7c3aed">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Close-up"
+                style="--a: #7c3aed"
+              >
+                <div class="gal-zoom">
                   <div class="mk mkx" style="--a: #7c3aed">
                     <div class="mk-bar"><i></i><i></i><i></i></div>
                     <div class="mk-body">
@@ -242,15 +810,152 @@
                     </div>
                   </div>
                 </div>
-                <p class="work-tag">Landing Page &middot; Demo</p>
-                <h3 class="t-h3">Clipform</h3>
-                <p class="t-body">A landing page for a social media course.</p>
-                <span class="link">View case study &rsaquo;</span></a
-              >
+              </div>
             </div>
-            <div class="rv filter-item" data-t="Company Profile">
-              <a href="case-pakaiwebaja.html" class="work-card"
-                ><div class="work-media">
+          </article>
+          <article
+            class="cs-slide"
+            id="pakaiwebaja"
+            data-name="PakaiWebAja"
+            data-tag="Company Profile"
+            data-desc="A company profile for a website service."
+            data-type="Company Profile"
+            data-cat="company-profile"
+            aria-roledescription="slide"
+          >
+            <div class="cs-media" style="--a: #1684ad">
+              <div class="mk mkx" style="--a: #1684ad">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div class="row" style="flex: 1.3">
+                    <div style="flex: 1.1">
+                      <span class="l h" style="width: 80%"></span
+                      ><span class="l h" style="width: 55%"></span
+                      ><span class="l" style="width: 70%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bt" style="margin-top: 10px"></div>
+                    </div>
+                    <div class="ac"></div>
+                  </div>
+                  <div class="grid3">
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phone">
+                <div class="phn mkx" style="--a: #1684ad">
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1"></div>
+                    <span class="l" style="width: 80%"></span
+                    ><span class="l" style="width: 60%"></span>
+                    <div class="bx" style="flex: 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-gallery" hidden>
+              <div
+                class="cs-media gal-item"
+                data-caption="Desktop view"
+                style="--a: #1684ad"
+              >
+                <div class="mk mkx" style="--a: #1684ad">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="row" style="flex: 1.3">
+                      <div style="flex: 1.1">
+                        <span class="l h" style="width: 80%"></span
+                        ><span class="l h" style="width: 55%"></span
+                        ><span class="l" style="width: 70%"></span
+                        ><span class="l" style="width: 60%"></span>
+                        <div class="bt" style="margin-top: 10px"></div>
+                      </div>
+                      <div class="ac"></div>
+                    </div>
+                    <div class="grid3">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Mobile view"
+                style="--a: #1684ad"
+              >
+                <div class="gal-phones">
+                  <div class="phn mkx" style="--a: #1684ad">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #1684ad">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Detail view"
+                style="--a: #1684ad"
+              >
+                <div class="mk mkx" style="--a: #1684ad">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="row" style="flex: 1.3">
+                      <div style="flex: 1.1">
+                        <span class="l h" style="width: 80%"></span
+                        ><span class="l h" style="width: 55%"></span
+                        ><span class="l" style="width: 70%"></span
+                        ><span class="l" style="width: 60%"></span>
+                        <div class="bt" style="margin-top: 10px"></div>
+                      </div>
+                      <div class="ac"></div>
+                    </div>
+                    <div class="grid3">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-phone">
+                  <div class="phn mkx" style="--a: #1684ad">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Close-up"
+                style="--a: #1684ad"
+              >
+                <div class="gal-zoom">
                   <div class="mk mkx" style="--a: #1684ad">
                     <div class="mk-bar"><i></i><i></i><i></i></div>
                     <div class="mk-body">
@@ -272,15 +977,152 @@
                     </div>
                   </div>
                 </div>
-                <p class="work-tag">Company Profile &middot; Demo</p>
-                <h3 class="t-h3">PakaiWebAja</h3>
-                <p class="t-body">A company profile for a website service.</p>
-                <span class="link">View case study &rsaquo;</span></a
-              >
+              </div>
             </div>
-            <div class="rv filter-item" data-t="Company Profile">
-              <a href="case-phi-tropmed.html" class="work-card"
-                ><div class="work-media">
+          </article>
+          <article
+            class="cs-slide"
+            id="phi-tropmed"
+            data-name="PHI Tropmed"
+            data-tag="Company Profile"
+            data-desc="A company profile for a research center."
+            data-type="Company Profile"
+            data-cat="company-profile"
+            aria-roledescription="slide"
+          >
+            <div class="cs-media" style="--a: #0f766e">
+              <div class="mk mkx" style="--a: #0f766e">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div class="row" style="flex: 1.3">
+                    <div style="flex: 1.1">
+                      <span class="l h" style="width: 80%"></span
+                      ><span class="l h" style="width: 55%"></span
+                      ><span class="l" style="width: 70%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bt" style="margin-top: 10px"></div>
+                    </div>
+                    <div class="ac"></div>
+                  </div>
+                  <div class="grid3">
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phone">
+                <div class="phn mkx" style="--a: #0f766e">
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1"></div>
+                    <span class="l" style="width: 80%"></span
+                    ><span class="l" style="width: 60%"></span>
+                    <div class="bx" style="flex: 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-gallery" hidden>
+              <div
+                class="cs-media gal-item"
+                data-caption="Desktop view"
+                style="--a: #0f766e"
+              >
+                <div class="mk mkx" style="--a: #0f766e">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="row" style="flex: 1.3">
+                      <div style="flex: 1.1">
+                        <span class="l h" style="width: 80%"></span
+                        ><span class="l h" style="width: 55%"></span
+                        ><span class="l" style="width: 70%"></span
+                        ><span class="l" style="width: 60%"></span>
+                        <div class="bt" style="margin-top: 10px"></div>
+                      </div>
+                      <div class="ac"></div>
+                    </div>
+                    <div class="grid3">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Mobile view"
+                style="--a: #0f766e"
+              >
+                <div class="gal-phones">
+                  <div class="phn mkx" style="--a: #0f766e">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f766e">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Detail view"
+                style="--a: #0f766e"
+              >
+                <div class="mk mkx" style="--a: #0f766e">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="row" style="flex: 1.3">
+                      <div style="flex: 1.1">
+                        <span class="l h" style="width: 80%"></span
+                        ><span class="l h" style="width: 55%"></span
+                        ><span class="l" style="width: 70%"></span
+                        ><span class="l" style="width: 60%"></span>
+                        <div class="bt" style="margin-top: 10px"></div>
+                      </div>
+                      <div class="ac"></div>
+                    </div>
+                    <div class="grid3">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-phone">
+                  <div class="phn mkx" style="--a: #0f766e">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Close-up"
+                style="--a: #0f766e"
+              >
+                <div class="gal-zoom">
                   <div class="mk mkx" style="--a: #0f766e">
                     <div class="mk-bar"><i></i><i></i><i></i></div>
                     <div class="mk-body">
@@ -302,15 +1144,152 @@
                     </div>
                   </div>
                 </div>
-                <p class="work-tag">Company Profile &middot; Client project</p>
-                <h3 class="t-h3">PHI Tropmed</h3>
-                <p class="t-body">A company profile for a research center.</p>
-                <span class="link">View case study &rsaquo;</span></a
-              >
+              </div>
             </div>
-            <div class="rv filter-item" data-t="Company Profile">
-              <a href="case-tubanan.html" class="work-card"
-                ><div class="work-media">
+          </article>
+          <article
+            class="cs-slide"
+            id="tubanan"
+            data-name="Tubanan"
+            data-tag="Company Profile"
+            data-desc="A village profile website."
+            data-type="Company Profile"
+            data-cat="company-profile"
+            aria-roledescription="slide"
+          >
+            <div class="cs-media" style="--a: #15803d">
+              <div class="mk mkx" style="--a: #15803d">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div class="row" style="flex: 1.3">
+                    <div style="flex: 1.1">
+                      <span class="l h" style="width: 80%"></span
+                      ><span class="l h" style="width: 55%"></span
+                      ><span class="l" style="width: 70%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bt" style="margin-top: 10px"></div>
+                    </div>
+                    <div class="ac"></div>
+                  </div>
+                  <div class="grid3">
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                    <div class="bx"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="cs-phone">
+                <div class="phn mkx" style="--a: #15803d">
+                  <div class="mk-body">
+                    <div class="ac" style="flex: 1"></div>
+                    <span class="l" style="width: 80%"></span
+                    ><span class="l" style="width: 60%"></span>
+                    <div class="bx" style="flex: 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cs-gallery" hidden>
+              <div
+                class="cs-media gal-item"
+                data-caption="Desktop view"
+                style="--a: #15803d"
+              >
+                <div class="mk mkx" style="--a: #15803d">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="row" style="flex: 1.3">
+                      <div style="flex: 1.1">
+                        <span class="l h" style="width: 80%"></span
+                        ><span class="l h" style="width: 55%"></span
+                        ><span class="l" style="width: 70%"></span
+                        ><span class="l" style="width: 60%"></span>
+                        <div class="bt" style="margin-top: 10px"></div>
+                      </div>
+                      <div class="ac"></div>
+                    </div>
+                    <div class="grid3">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Mobile view"
+                style="--a: #15803d"
+              >
+                <div class="gal-phones">
+                  <div class="phn mkx" style="--a: #15803d">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #0f6182">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                  <div class="phn mkx" style="--a: #15803d">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Detail view"
+                style="--a: #15803d"
+              >
+                <div class="mk mkx" style="--a: #15803d">
+                  <div class="mk-bar"><i></i><i></i><i></i></div>
+                  <div class="mk-body">
+                    <div class="row" style="flex: 1.3">
+                      <div style="flex: 1.1">
+                        <span class="l h" style="width: 80%"></span
+                        ><span class="l h" style="width: 55%"></span
+                        ><span class="l" style="width: 70%"></span
+                        ><span class="l" style="width: 60%"></span>
+                        <div class="bt" style="margin-top: 10px"></div>
+                      </div>
+                      <div class="ac"></div>
+                    </div>
+                    <div class="grid3">
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                      <div class="bx"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cs-phone">
+                  <div class="phn mkx" style="--a: #15803d">
+                    <div class="mk-body">
+                      <div class="ac" style="flex: 1"></div>
+                      <span class="l" style="width: 80%"></span
+                      ><span class="l" style="width: 60%"></span>
+                      <div class="bx" style="flex: 1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="cs-media gal-item"
+                data-caption="Close-up"
+                style="--a: #15803d"
+              >
+                <div class="gal-zoom">
                   <div class="mk mkx" style="--a: #15803d">
                     <div class="mk-bar"><i></i><i></i><i></i></div>
                     <div class="mk-body">
@@ -332,33 +1311,176 @@
                     </div>
                   </div>
                 </div>
-                <p class="work-tag">Company Profile &middot; Client project</p>
-                <h3 class="t-h3">Tubanan</h3>
-                <p class="t-body">A village profile website.</p>
-                <span class="link">View case study &rsaquo;</span></a
-              >
+              </div>
             </div>
+          </article>
+        </div>
+        <div class="container cs-info">
+          <div class="cs-info__text" data-cs-text aria-live="polite">
+            <p class="t-eyebrow" data-cs-tag>Catalog</p>
+            <h2 class="t-h2" data-cs-name>Natura Furniture</h2>
+            <p class="t-body" data-cs-desc>
+              A furniture catalog built for easy browsing.
+            </p>
+            <button type="button" class="btn btn-light" data-cs-details>
+              View details
+            </button>
+          </div>
+          <div class="cs-controls">
+            <button class="cs-arrow" data-cs-prev aria-label="Previous case">
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 12H5M11 6l-6 6 6 6" />
+              </svg>
+            </button>
+            <button class="cs-arrow" data-cs-next aria-label="Next case">
+              <svg
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
           </div>
         </div>
       </section>
-      <!-- Call to action -->
-      <section class="cta on-dark">
-        <div class="container">
-          <h2 class="t-h2 rv">Let's build yours.</h2>
-          <p class="t-lead rv">
-            Tell us about your project and get a clear plan and quote.
-          </p>
-          <p class="rv">
-            <a href="contact.html" class="btn btn-light">Get a Quote</a>
-          </p>
+      <!-- Case study pop-up with a gallery. Filled by main.js from the slide's hidden .cs-gallery -->
+      <dialog
+        class="case-modal"
+        data-case-modal
+        aria-labelledby="case-modal-title"
+      >
+        <div class="case-modal__inner">
+          <button
+            type="button"
+            class="case-modal__close"
+            data-modal-close
+            aria-label="Close"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+          <div class="case-modal__gallery">
+            <div class="case-modal__stage" data-modal-stage>
+              <div class="case-modal__track" data-modal-track></div>
+              <button
+                type="button"
+                class="case-modal__nav case-modal__nav--prev"
+                data-modal-prev
+                aria-label="Previous image"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M19 12H5M11 6l-6 6 6 6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                class="case-modal__nav case-modal__nav--next"
+                data-modal-next
+                aria-label="Next image"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </div>
+            <div class="case-modal__bar">
+              <p class="t-small" data-modal-caption data-modal-dyn></p>
+              <div class="gal-dots" data-modal-dots></div>
+            </div>
+          </div>
+          <div class="case-modal__info">
+            <p class="t-eyebrow" data-modal-tag data-modal-dyn></p>
+            <h2
+              class="t-h2"
+              id="case-modal-title"
+              data-modal-name
+              data-modal-dyn
+            ></h2>
+            <p class="t-body" data-modal-desc data-modal-dyn></p>
+            <dl class="case-facts">
+              <div>
+                <dt>Type</dt>
+                <dd data-modal-type data-modal-dyn></dd>
+              </div>
+              </dl>
+          </div>
         </div>
-      </section>
+      </dialog>
     </main>
 
     <!-- Site footer -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-grid">
+          <div>
+            <a href="index.html" class="brand brand--footer">
+              <span class="brand__mark">MKC</span>
+              <span class="brand__name">Mari Kawan Creative</span>
+            </a>
+            <p class="footer-text footer-about">
+              Websites for brands and institutions.
+            </p>
+
+            <!-- Highlighted call to action -->
+            <div class="footer-cta">
+              <div class="footer-cta__copy">
+                <p class="footer-cta__eyebrow">Let's build yours.</p>
+                <p class="footer-cta__text">
+                  Tell us about your project and get a clear plan and quote.
+                </p>
+              </div>
+              <a href="contact.html" class="btn btn-cta"
+                >Get a Quote <span aria-hidden="true">&rarr;</span></a
+              >
+            </div>
+          </div>
           <div>
             <h2 class="footer-title">Contact Info</h2>
             <address class="footer-text">
@@ -367,24 +1489,6 @@
             <p class="footer-text">hello[at]marikawan.com</p>
             <p class="footer-tel">Tel: +62 (800) 555 5555</p>
             <p class="footer-hours">Monday to Friday | 9:00 AM - 6:00 PM</p>
-          </div>
-          <div>
-            <h2 class="footer-title">Tech Stack</h2>
-            <ul class="footer-list">
-              <li>WordPress &amp; PHP</li>
-              <li>React &amp; Next.js</li>
-              <li>HTML &amp; Tailwind CSS</li>
-              <li>Firebase &amp; PWA</li>
-            </ul>
-          </div>
-          <div>
-            <h2 class="footer-title">Services</h2>
-            <ul class="footer-list">
-              <li><a href="services.html">Company Profile</a></li>
-              <li><a href="services.html">Catalog Website</a></li>
-              <li><a href="services.html">News and Blog</a></li>
-              <li><a href="services.html">Landing Page</a></li>
-            </ul>
           </div>
           <div>
             <h2 class="footer-title">Site Links</h2>
@@ -397,72 +1501,30 @@
             </ul>
           </div>
         </div>
-        <div class="footer-mid">
-          <a href="index.html" class="brand brand--footer">
-            <span class="brand__mark">MKC</span>
-            <span class="brand__name">Mari Kawan Creative.</span>
-          </a>
-          <p class="footer-tagline">Your Trusted Partner In Digital World</p>
-          <a href="contact.html" class="btn btn-outline-light"
-            >Get Started <span aria-hidden="true">&rarr;</span></a
-          >
-        </div>
         <div class="footer-bottom">
           <p>
             &copy; 2026 &bull; Mari Kawan Creative is a Web Agency. All Rights
             Reserved.
           </p>
-          <div class="footer-social">
-            <a
-              href="https://www.instagram.com/marikawanid"
-              class="footer-social__link"
-              target="_blank"
-              rel="noopener"
-              aria-label="Instagram @marikawanid"
-              ><svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle
-                  cx="17.5"
-                  cy="6.5"
-                  r="1"
-                  fill="currentColor"
-                  stroke="none"
-                /></svg></a
-            ><a
-              href="https://www.youtube.com/@marikawanid"
-              class="footer-social__link"
-              target="_blank"
-              rel="noopener"
-              aria-label="YouTube @marikawanid"
-              ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"
-                /></svg></a
-            ><a
-              href="https://www.tiktok.com/@marikawanid"
-              class="footer-social__link"
-              target="_blank"
-              rel="noopener"
-              aria-label="TikTok @marikawanid"
-              ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"
-                /></svg
-            ></a>
-          </div>
         </div>
       </div>
     </footer>
+    <button type="button" class="to-top" data-to-top aria-label="Back to top">
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+    <script src="assets/i18n.js"></script>
     <script src="assets/main.js"></script>
   </body>
 </html>

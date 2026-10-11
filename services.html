@@ -9,7 +9,7 @@
     <title>Services | Mari Kawan Creative</title>
     <meta
       name="description"
-      content="Company profile, catalog, news and landing page websites by Mari Kawan Creative."
+      content="Company profile, catalog, news and landing page websites by Mari Kawan Creative, starting from $100."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,6 +19,13 @@
     />
     <script>
       document.documentElement.classList.add("js");
+      (function () {
+        try {
+          var t = localStorage.getItem("mkc-theme");
+          if (!t) t = "light";
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -47,7 +54,7 @@
     </script>
     <link rel="stylesheet" href="assets/style.css" />
   </head>
-  <body class="bg-white font-sans antialiased">
+  <body class="font-sans antialiased">
     <!-- Site header -->
     <header class="site-header">
       <div class="container site-header__bar">
@@ -67,7 +74,68 @@
           ><a href="contact.html">Contact</a>
         </nav>
         <div class="site-header__actions">
-          <a class="btn btn-primary btn-sm" href="contact.html">Get a Quote</a>
+          <div class="lang-menu" data-lang-menu>
+            <button
+              type="button"
+              class="lang-btn"
+              data-lang-toggle
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="lang-list"
+              aria-label="Language"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></svg>
+              <span data-lang-current>EN</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+            </button>
+            <div id="lang-list" class="lang-list" role="group" aria-label="Language" hidden>
+              <button type="button" data-lang="en" aria-pressed="true">English</button>
+              <button type="button" data-lang="id" aria-pressed="false">Bahasa Indonesia</button>
+              <button type="button" data-lang="es" aria-pressed="false">Español</button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="theme-btn"
+            data-theme-toggle
+            aria-label="Toggle dark mode"
+          >
+            <span class="i-moon"
+              ><svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"
+                /></svg></span
+            ><span class="i-sun"
+              ><svg
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path
+                  d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                /></svg
+            ></span>
+          </button>
+          <a class="btn btn-primary btn-sm site-header__cta" href="contact.html"
+            >Get a Quote</a
+          >
           <button
             id="menu-btn"
             class="menu-btn"
@@ -93,6 +161,9 @@
         ><a href="services.html">Services</a
         ><a href="case-studies.html">Case Studies</a
         ><a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn-primary mobile-menu__cta"
+          >Get a Quote</a
+        >
       </div>
     </header>
     <main>
@@ -105,8 +176,8 @@
             One clear standard.
           </h1>
           <p class="t-lead rv">
-            Pick what you need. Each one is designed mobile first and built to
-            load fast.
+            Pick what you need, or tell us something different. Every site is
+            designed mobile first and built to load fast.
           </p>
         </div>
       </section>
@@ -114,25 +185,30 @@
       <section class="section">
         <div class="container">
           <div class="feature">
-            <div class="rv">
+            <div class="feature__text rv">
               <p class="t-eyebrow">
                 For businesses, institutions and communities.
               </p>
               <h2 class="t-h2">Company Profile</h2>
-              <p class="t-body">
+              <p class="t-lead">
                 Tell your brand story with a clear, credible presence that earns
                 trust on the first visit.
+              </p>
+              <p class="t-body">
+                A company profile is often the first place people check before
+                they contact you. We design it to explain who you are, what you
+                offer and why people can trust you, with a structure that is
+                easy to scan on any device.
               </p>
               <ul class="check-list">
                 <li>About, services and team pages</li>
                 <li>Contact paths on every page</li>
                 <li>Designed around your brand</li>
+                <li>Easy to update as you grow</li>
               </ul>
               <div class="actions">
-                <a href="contact.html" class="btn btn-primary"
-                  >Start this project</a
-                ><a href="case-studies.html" class="link"
-                  >See examples &rsaquo;</a
+                <a href="case-studies.html?type=company-profile" class="btn btn-primary"
+                  >See examples</a
                 >
               </div>
             </div>
@@ -165,23 +241,28 @@
       <section class="section section-alt">
         <div class="container">
           <div class="feature feature--flip">
-            <div class="rv">
+            <div class="feature__text rv">
               <p class="t-eyebrow">For retail, furniture, crafts and more.</p>
               <h2 class="t-h2">Catalog Website</h2>
-              <p class="t-body">
+              <p class="t-lead">
                 Show your products in a clean, organized catalog that is easy to
                 browse on any screen.
+              </p>
+              <p class="t-body">
+                A catalog works best when people can find the right item in a
+                few taps. We organize your products into clear categories and
+                consistent cards, so visitors can browse, compare and reach out
+                without friction.
               </p>
               <ul class="check-list">
                 <li>Categories and product cards</li>
                 <li>Detail pages that help people decide</li>
                 <li>Fast, mobile-first browsing</li>
+                <li>A clear way to inquire or order</li>
               </ul>
               <div class="actions">
-                <a href="contact.html" class="btn btn-primary"
-                  >Start this project</a
-                ><a href="case-studies.html" class="link"
-                  >See examples &rsaquo;</a
+                <a href="case-studies.html?type=catalog" class="btn btn-primary"
+                  >See examples</a
                 >
               </div>
             </div>
@@ -231,25 +312,30 @@
       <section class="section">
         <div class="container">
           <div class="feature">
-            <div class="rv">
+            <div class="feature__text rv">
               <p class="t-eyebrow">
                 For organizations, research groups and communities.
               </p>
               <h2 class="t-h2">News and Blog</h2>
-              <p class="t-body">
+              <p class="t-lead">
                 Publish articles and updates in a calm, readable layout that is
                 simple to keep fresh.
               </p>
+              <p class="t-body">
+                Regular updates build trust, but only if they are easy to read
+                and easy to find. We create a calm reading layout with
+                categories and highlights, so your articles get the attention
+                they deserve.
+              </p>
               <ul class="check-list">
                 <li>Comfortable reading experience</li>
-                <li>Categories and highlights</li>
+                <li>Categories and featured posts</li>
                 <li>Structure that is easy to update</li>
+                <li>Article pages that are easy to share</li>
               </ul>
               <div class="actions">
-                <a href="contact.html" class="btn btn-primary"
-                  >Start this project</a
-                ><a href="case-studies.html" class="link"
-                  >See examples &rsaquo;</a
+                <a href="case-studies.html?type=news-blog" class="btn btn-primary"
+                  >See examples</a
                 >
               </div>
             </div>
@@ -289,23 +375,27 @@
       <section class="section section-alt">
         <div class="container">
           <div class="feature feature--flip">
-            <div class="rv">
+            <div class="feature__text rv">
               <p class="t-eyebrow">For courses, events and campaigns.</p>
               <h2 class="t-h2">Landing Page</h2>
-              <p class="t-body">
+              <p class="t-lead">
                 One focused page with one clear message, built to turn visitors
                 into sign-ups and inquiries.
+              </p>
+              <p class="t-body">
+                A landing page has one job: to turn a visit into an action. We
+                focus on one clear message, the right proof and a call to action
+                that is easy to find, especially on mobile.
               </p>
               <ul class="check-list">
                 <li>Strong headline and call to action</li>
                 <li>Proof and details in the right order</li>
                 <li>Built to convert on mobile</li>
+                <li>Sign-up or inquiry form</li>
               </ul>
               <div class="actions">
-                <a href="contact.html" class="btn btn-primary"
-                  >Start this project</a
-                ><a href="case-studies.html" class="link"
-                  >See examples &rsaquo;</a
+                <a href="case-studies.html?type=landing-page" class="btn btn-primary"
+                  >See examples</a
                 >
               </div>
             </div>
@@ -339,50 +429,83 @@
           </div>
         </div>
       </section>
-      <!-- Process -->
-      <section class="section section-alt">
+      <!-- Service: Custom & More -->
+      <section class="section">
         <div class="container">
-          <div class="section-head rv"><h2 class="t-h2">How we work.</h2></div>
-          <div class="grid-4 mt-12">
-            <div class="card rv">
-              <p class="step-num">01</p>
-              <h3 class="t-h3">Discover</h3>
-              <p class="t-body">We learn your goals, audience and content.</p>
-            </div>
-            <div class="card rv">
-              <p class="step-num">02</p>
-              <h3 class="t-h3">Design</h3>
-              <p class="t-body">
-                A clear, mobile-first layout in your brand colors.
+          <div class="feature">
+            <div class="feature__text rv">
+              <p class="t-eyebrow">For ideas that do not fit a box.</p>
+              <h2 class="t-h2">Custom & More</h2>
+              <p class="t-lead">
+                Something different? We listen first, then design and build what
+                fits your needs.
               </p>
-            </div>
-            <div class="card rv">
-              <p class="step-num">03</p>
-              <h3 class="t-h3">Build</h3>
               <p class="t-body">
-                Fast, accessible pages that work on every device.
+                Some ideas do not fit a standard type, and that is fine. We
+                start by listening to what you need, then propose a scope and
+                price that fits. You can start from $100 and grow from there.
               </p>
+              <ul class="check-list">
+                <li>A free conversation about your needs</li>
+                <li>Scope and features shaped around you</li>
+                <li>Support as your needs grow</li>
+                <li>One clear estimate before we start</li>
+              </ul>
+              <div class="actions">
+                <a href="case-studies.html" class="btn btn-primary"
+                  >See examples</a
+                >
+              </div>
             </div>
-            <div class="card rv">
-              <p class="step-num">04</p>
-              <h3 class="t-h3">Launch</h3>
-              <p class="t-body">
-                We publish, test and hand over, with support after.
-              </p>
+            <div class="feature__media card card-blue rv">
+              <div class="mk mkx" style="--a: #1684ad">
+                <div class="mk-bar"><i></i><i></i><i></i></div>
+                <div class="mk-body">
+                  <div
+                    style="
+                      display: grid;
+                      place-items: center;
+                      flex: 1;
+                      border: 2px dashed var(--a);
+                      border-radius: 10px;
+                      color: var(--a);
+                      font-size: 2.25rem;
+                      font-weight: 300;
+                    "
+                  >
+                    +
+                  </div>
+                  <span class="l" style="width: 60%"></span
+                  ><span class="l" style="width: 40%"></span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <!-- Call to action -->
-      <section class="cta on-dark">
+      <!-- Pricing -->
+      <section class="section-sm">
         <div class="container">
-          <h2 class="t-h2 rv">Let's build yours.</h2>
-          <p class="t-lead rv">
-            Tell us about your project and get a clear plan and quote.
-          </p>
-          <p class="rv">
-            <a href="contact.html" class="btn btn-light">Get a Quote</a>
-          </p>
+          <div class="price-box rv">
+            <div>
+              <p class="t-eyebrow">Pricing</p>
+              <h2 class="t-h2">One starting point. Built around your needs.</h2>
+              <p class="t-lead">
+                No fixed packages and no price tiers. Tell us what you need and
+                we shape the scope and price to fit.
+              </p>
+            </div>
+            <div class="price-card">
+              <p class="t-small">Starting from</p>
+              <p class="price-amount">$100</p>
+              <p class="t-body">about Rp 1.600.000</p>
+              <p class="t-small">Final price depends on scope.</p>
+              <a href="contact.html" class="btn btn-primary"
+                >Get a project estimate</a
+              >
+              <p class="t-small">We reply within one business day.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -392,6 +515,28 @@
       <div class="container">
         <div class="footer-grid">
           <div>
+            <a href="index.html" class="brand brand--footer">
+              <span class="brand__mark">MKC</span>
+              <span class="brand__name">Mari Kawan Creative</span>
+            </a>
+            <p class="footer-text footer-about">
+              Websites for brands and institutions.
+            </p>
+
+            <!-- Highlighted call to action -->
+            <div class="footer-cta">
+              <div class="footer-cta__copy">
+                <p class="footer-cta__eyebrow">Let's build yours.</p>
+                <p class="footer-cta__text">
+                  Tell us about your project and get a clear plan and quote.
+                </p>
+              </div>
+              <a href="contact.html" class="btn btn-cta"
+                >Get a Quote <span aria-hidden="true">&rarr;</span></a
+              >
+            </div>
+          </div>
+          <div>
             <h2 class="footer-title">Contact Info</h2>
             <address class="footer-text">
               123 Creative Street, Jakarta<br />Indonesia - 12345
@@ -399,24 +544,6 @@
             <p class="footer-text">hello[at]marikawan.com</p>
             <p class="footer-tel">Tel: +62 (800) 555 5555</p>
             <p class="footer-hours">Monday to Friday | 9:00 AM - 6:00 PM</p>
-          </div>
-          <div>
-            <h2 class="footer-title">Tech Stack</h2>
-            <ul class="footer-list">
-              <li>WordPress &amp; PHP</li>
-              <li>React &amp; Next.js</li>
-              <li>HTML &amp; Tailwind CSS</li>
-              <li>Firebase &amp; PWA</li>
-            </ul>
-          </div>
-          <div>
-            <h2 class="footer-title">Services</h2>
-            <ul class="footer-list">
-              <li><a href="services.html">Company Profile</a></li>
-              <li><a href="services.html">Catalog Website</a></li>
-              <li><a href="services.html">News and Blog</a></li>
-              <li><a href="services.html">Landing Page</a></li>
-            </ul>
           </div>
           <div>
             <h2 class="footer-title">Site Links</h2>
@@ -429,72 +556,30 @@
             </ul>
           </div>
         </div>
-        <div class="footer-mid">
-          <a href="index.html" class="brand brand--footer">
-            <span class="brand__mark">MKC</span>
-            <span class="brand__name">Mari Kawan Creative.</span>
-          </a>
-          <p class="footer-tagline">Your Trusted Partner In Digital World</p>
-          <a href="contact.html" class="btn btn-outline-light"
-            >Get Started <span aria-hidden="true">&rarr;</span></a
-          >
-        </div>
         <div class="footer-bottom">
           <p>
             &copy; 2026 &bull; Mari Kawan Creative is a Web Agency. All Rights
             Reserved.
           </p>
-          <div class="footer-social">
-            <a
-              href="https://www.instagram.com/marikawanid"
-              class="footer-social__link"
-              target="_blank"
-              rel="noopener"
-              aria-label="Instagram @marikawanid"
-              ><svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle
-                  cx="17.5"
-                  cy="6.5"
-                  r="1"
-                  fill="currentColor"
-                  stroke="none"
-                /></svg></a
-            ><a
-              href="https://www.youtube.com/@marikawanid"
-              class="footer-social__link"
-              target="_blank"
-              rel="noopener"
-              aria-label="YouTube @marikawanid"
-              ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  fill-rule="evenodd"
-                  d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.2 22 12 22 12s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"
-                /></svg></a
-            ><a
-              href="https://www.tiktok.com/@marikawanid"
-              class="footer-social__link"
-              target="_blank"
-              rel="noopener"
-              aria-label="TikTok @marikawanid"
-              ><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"
-                /></svg
-            ></a>
-          </div>
         </div>
       </div>
     </footer>
+    <button type="button" class="to-top" data-to-top aria-label="Back to top">
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+    <script src="assets/i18n.js"></script>
     <script src="assets/main.js"></script>
   </body>
 </html>
